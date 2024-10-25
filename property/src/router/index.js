@@ -120,6 +120,11 @@ const routes = [
         path: 'personal/joinChat',
         name: 'JoinChat',
         component: () => import('../components/JoinChat.vue')
+      },
+      {
+        path: 'pay/payAdd',
+        name: 'PayAdd',
+        component: () => import('../components/PayAdd.vue')
       }
     ]
   }
