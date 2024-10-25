@@ -1,52 +1,134 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Login from "../views/login.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import Login from '../views/login.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    redirect: "/login"
+    path: '/',
+    redirect: '/login'
   },
   {
-    path: "/login",
-    name: "Login",
-    component: Login,
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
-  // {
-  //   path: "/home",
-  //   name: "Home",
-  //   // redirect: "/home/index",
-  //   component: Home,
-  //   children: [
-  //     {
-  //       path: "/home/index",
-  //       name: "Index",
-  //       component: () => import("../components/Index.vue"),
-  //       meta: { title: '首页' },
-  //     }
-  //   ]
-  // }
   {
-    path: "/index",
-    name: "Home",
+    path: '/index',
+    name: 'Home',
     component: Home,
-    children:[
+    redirect: '/index/echarts',
+    children: [
       {
-        path: "index/house/unit",
-        name: "Unit",
-        component: () => import("../components/Unit.vue")
+        path: 'echarts',
+        name: 'Echarts',
+        component: () => import('../components/Echarts.vue')
+      },
+      {
+        path: 'house/unit',
+        name: 'Unit',
+        component: () => import('../components/Unit.vue')
+      },
+      {
+        path: 'house/number',
+        name: 'Number',
+        component: () => import('../components/Number.vue')
+      },
+      {
+        path: 'house/deviceInfo',
+        name: 'DeviceInfo',
+        component: () => import('../components/DeviceInfo.vue')
+      },
+      {
+        path: 'parking/parkMessage',
+        name: 'ParkMessage',
+        component: () => import('../components/ParkMessage.vue')
+      },
+      {
+        path: 'parking/parkPay',
+        name: 'ParkPay',
+        component: () => import('../components/ParkPay.vue')
+      },
+      {
+        path: 'parking/parkPay',
+        name: 'ParkPay',
+        component: () => import('../components/ParkPay.vue')
+      },
+      {
+        path: 'pay/payType',
+        name: 'PayType',
+        component: () => import('../components/PayType.vue')
+      },
+      {
+        path: 'pay/payMessage',
+        name: 'PayMessage',
+        component: () => import('../components/PayMessage.vue')
+      },
+      {
+        path: 'service/postMessage',
+        name: 'PostMessage',
+        component: () => import('../components/PostMessage.vue')
+      },
+      {
+        path: 'service/repair',
+        name: 'Repair',
+        component: () => import('../components/Repair.vue')
+      },
+      {
+        path: 'service/feedback',
+        name: 'Feedback',
+        component: () => import('../components/Feedback.vue')
+      },
+      {
+        path: 'user/userMessage',
+        name: 'UserMessage',
+        component: () => import('../components/UserMessage.vue')
+      },
+      {
+        path: 'user/adminMessage',
+        name: 'AdminMessage',
+        component: () => import('../components/AdminMessage.vue')
+      },
+      {
+        path: 'user/Message',
+        name: 'Message',
+        component: () => import('../components/Message.vue')
+      },
+      {
+        path: 'menu/menuData',
+        name: 'MenuData',
+        component: () => import('../components/MenuData.vue')
+      },
+      {
+        path: 'menu/loginData',
+        name: 'LoginData',
+        component: () => import('../components/LoginData.vue')
+      },
+      {
+        path: 'personal/message',
+        name: 'PersonalMessage',
+        component: () => import('../components/personal-message.vue')
+      },
+      {
+        path: 'personal/change',
+        name: 'Change',
+        component: () => import('../components/Change.vue')
+      },
+      {
+        path: 'personal/joinChat',
+        name: 'JoinChat',
+        component: () => import('../components/JoinChat.vue')
       }
     ]
   }
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
-  routes,
-});
+  routes
+})
 
-export default router;
+export default router
