@@ -1,9 +1,17 @@
 <template>
   <div id="app">
+    <!-- <home></home> -->
     <router-view></router-view>
   </div>
 </template>
-
+<script>
+export default {
+  name: 'App',
+  components: {
+    // Home: () => import('./views/Home.vue')
+  }
+}
+</script>
 <style lang="scss">
 *{
   margin: 0;

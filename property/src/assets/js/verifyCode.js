@@ -59,9 +59,9 @@ GVerify.prototype = {
         if (this.options.type === 'blend') { // 判断验证码类型
             var txtArr = this.options.numArr.concat(this.options.letterArr)
         } else if (this.options.type === 'number') {
-            var txtArr = this.options.numArr
+            txtArr = this.options.numArr
         } else {
-            var txtArr = this.options.letterArr
+            txtArr = this.options.letterArr
         }
         this.options.code = ''
         for (var i = 1; i <= 4; i++) {
@@ -85,7 +85,7 @@ GVerify.prototype = {
             ctx.translate(-x, -y)
         }
         /** 绘制干扰线**/
-        for (var i = 0; i < 4; i++) {
+        for (i = 0; i < 4; i++) {
             ctx.strokeStyle = randomColor(40, 180)
             ctx.beginPath()
             ctx.moveTo(randomNum(0, this.options.width), randomNum(0, this.options.height))
@@ -93,7 +93,7 @@ GVerify.prototype = {
             ctx.stroke()
         }
         /** 绘制干扰点**/
-        for (var i = 0; i < this.options.width / 4; i++) {
+        for (i = 0; i < this.options.width / 4; i++) {
             ctx.fillStyle = randomColor(0, 255)
             ctx.beginPath()
             ctx.arc(randomNum(0, this.options.width), randomNum(0, this.options.height), 1, 0, 2 * Math.PI)
@@ -103,7 +103,7 @@ GVerify.prototype = {
 
     /** 验证验证码**/
     validate: function (code) {
-        var code = code.toLowerCase()
+        code = code.toLowerCase()
         var v_code = this.options.code.toLowerCase()
         if (code == v_code) {
             return true

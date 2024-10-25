@@ -15,10 +15,31 @@ const routes = [
     name: "Login",
     component: Login,
   },
+  // {
+  //   path: "/home",
+  //   name: "Home",
+  //   // redirect: "/home/index",
+  //   component: Home,
+  //   children: [
+  //     {
+  //       path: "/home/index",
+  //       name: "Index",
+  //       component: () => import("../components/Index.vue"),
+  //       meta: { title: '首页' },
+  //     }
+  //   ]
+  // }
   {
-    path: "/home",
+    path: "/index",
     name: "Home",
     component: Home,
+    children:[
+      {
+        path: "index/house/unit",
+        name: "Unit",
+        component: () => import("../components/Unit.vue")
+      }
+    ]
   }
 ];
 
