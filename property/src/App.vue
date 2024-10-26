@@ -18,6 +18,10 @@ export default {
   padding: 0;
 }
 
+img {
+  vertical-align: middle;
+}
+
 // #app {
 //   font-family: Avenir, Helvetica, Arial, sans-serif;
 //   -webkit-font-smoothing: antialiased;

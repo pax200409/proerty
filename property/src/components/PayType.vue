@@ -31,7 +31,11 @@
                 @click="getList"
                 >查询
               </el-button>
-              <el-button type="success" size="small" icon="el-icon-plus"
+              <el-button
+                type="success"
+                size="small"
+                icon="el-icon-plus"
+                @click="addPayment"
                 >新增
               </el-button>
               <el-button
@@ -70,7 +74,7 @@
             border
             :stripe="true"
             style="width: 100%"
-            height="460"
+            height="430"
             v-loading="loading"
           >
             <el-table-column
@@ -319,7 +323,6 @@ export default {
           params: this.parameters
         }
       )
-      console.log(res)
       res.data.map((item) => {
         item.paytime = this.getDateTwoDaysBefore(item.paytime)
       })
@@ -369,7 +372,16 @@ export default {
         }
       })
     },
-
+    // 新增
+    addPayment() {
+      this.$router.push({
+        name: 'PayAdd',
+        query: {
+          type: 'ADD',
+          paystatus: 2
+        }
+      })
+    },
     // 作废
     setAside(row) {
       this.$confirm('是否作废?', '提示', {
