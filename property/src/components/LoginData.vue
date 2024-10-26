@@ -7,7 +7,8 @@
         </el-option>
       </el-select>
       <el-date-picker v-model="value2" type="daterange" align="right" unlink-panels range-separator="至"
-        start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions" style="width: 25%;">
+
+      start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions" style="width: 25%;">
       </el-date-picker>
       <el-button type="primary" icon="el-icon-search" style="width: 8%; font-size: 14px; margin-left: 10px;"
         @click="search">查询</el-button>
@@ -16,7 +17,6 @@
       <el-tabs type="border-card">
         <el-tab-pane label="登录日志">
           <el-table :data="tableData" border style="width: 100%">
-
             <el-table-column type="index" label="序号" width="80">
             </el-table-column>
             <el-table-column prop="username" label="登陆账户" min-width="226">
@@ -29,15 +29,11 @@
             <el-table-column prop="createtime" label="登录时间" min-width="446">
             </el-table-column>
             <el-table-column label="操作" min-width="163">
-              <!-- <template slot-scope="scope"> -->
-              <template>
-                <!-- <el-button style="background-color: red;color: white;"
-                  @click="handleDetele(scope.row.id)">删除记录</el-button> -->
+              <template slot-scope="scope">
                 <el-button style="background-color: red;color: white;"
-                 >删除记录</el-button>
+                  @click="handleDetele(scope.row.id)">删除记录</el-button>
               </template>
             </el-table-column>
-
           </el-table>
           <!-- 分页 -->
           <div class="block" style="text-align: right ; margin-top: 20px;">
@@ -134,28 +130,28 @@ export default {
       this.total = res.total
     },
     // 删除
-    // handleDetele(id) {
-    //   this.$confirm("确定删除该条登录信息？", "提示", {
-    //     confirmButtonText: "确定",
-    //     cancelButtonText: "取消",
-    //     type: "warning",
-    //   }).then(() => {
-    //     this.axios.get('http://community.byesame.com/users/delLoginData',{
-    //       pramas:{
-    //         id:id
-    //       },
-    //       token: sessionStorage.token
-    //     })
-    //     this.$message.success('作废成功')
-    //     this.handleGetList()
-    //   })
-    //   .catch(() => {
-    //       this.$message.error('作废失败')
-    //       this.handleGetList()
-    //     })
-    // },
+    handleDetele(id) {
+      this.$confirm("确定删除该条登录信息？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        this.axios.get('http://community.byesame.com/users/delLoginData',{
+          pramas:{
+            id:id
+          },
+          token: sessionStorage.token
+        })
+        this.$message.success('作废成功')
+        this.handleGetList()
+      })
+      .catch(() => {
+          this.$message.error('作废失败')
+          this.handleGetList()
+        })
+    },
 
-    search() { },
+    search(){ },
 
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);

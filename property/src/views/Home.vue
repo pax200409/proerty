@@ -8,19 +8,10 @@
         <div class="nav_menu">
           <!--                管理员-->
           <div v-if="this.type == '1'">
-            <el-menu
-              default-active="1"
-              class="el-menu-demo"
-              :collapse="isCollapse"
-              mode="horizontal"
-              @select="handleSelect"
-            >
+            <el-menu default-active="1" class="el-menu-demo" :collapse="isCollapse" mode="horizontal"
+              @select="handleSelect">
               <div v-for="(item, index) in menuList" :key="index">
-                <el-menu-item
-                  v-if="!item.children"
-                  :index="item.id"
-                  @click="dealNavLink(item._key, item.id)"
-                >
+                <el-menu-item v-if="!item.children" :index="item.id" @click="dealNavLink(item._key, item.id)">
                   <span slot="title" style="color: white">{{
                     item.title
                   }}</span>
@@ -28,22 +19,11 @@
 
                 <el-submenu v-else :index="item.id">
                   <template slot="title">
-                    <span
-                      class="span1"
-                      v-show="!isCollapse"
-                      slot="title"
-                      style="color: white"
-                      >{{ item.title }}</span
-                    >
+                    <span class="span1" v-show="!isCollapse" slot="title" style="color: white">{{ item.title }}</span>
                   </template>
                   <el-menu-item-group>
-                    <el-menu-item
-                      class="submenu_item"
-                      v-for="subItem in item.children"
-                      :key="subItem.id"
-                      :index="subItem.id"
-                      @click="dealNavLink(subItem._key, item.id)"
-                    >
+                    <el-menu-item class="submenu_item" v-for="subItem in item.children" :key="subItem.id"
+                      :index="subItem.id" @click="dealNavLink(subItem._key, item.id)">
                       <template>
                         <span slot="title" style="color: black">{{
                           subItem.title
@@ -58,19 +38,10 @@
 
           <!--                普通用户-->
           <div v-else>
-            <el-menu
-              default-active="1"
-              class="el-menu-demo"
-              :collapse="isCollapse"
-              mode="horizontal"
-              @select="handleSelect"
-            >
+            <el-menu default-active="1" class="el-menu-demo" :collapse="isCollapse" mode="horizontal"
+              @select="handleSelect">
               <div v-for="(item, index) in userMenu" :key="index">
-                <el-menu-item
-                  v-if="!item.children"
-                  :index="item.id"
-                  @click="dealNavLink(item._key, item.id)"
-                >
+                <el-menu-item v-if="!item.children" :index="item.id" @click="dealNavLink(item._key, item.id)">
                   <span slot="title" style="color: white">{{
                     item.title
                   }}</span>
@@ -78,22 +49,11 @@
 
                 <el-submenu v-else :index="item.id">
                   <template slot="title">
-                    <span
-                      class="span1"
-                      v-show="!isCollapse"
-                      slot="title"
-                      style="color: white"
-                      >{{ item.title }}</span
-                    >
+                    <span class="span1" v-show="!isCollapse" slot="title" style="color: white">{{ item.title }}</span>
                   </template>
                   <el-menu-item-group>
-                    <el-menu-item
-                      class="submenu_item"
-                      v-for="subItem in item.children"
-                      :key="subItem.id"
-                      :index="subItem.id"
-                      @click="dealNavLink(subItem._key, item.id)"
-                    >
+                    <el-menu-item class="submenu_item" v-for="subItem in item.children" :key="subItem.id"
+                      :index="subItem.id" @click="dealNavLink(subItem._key, item.id)">
                       <template>
                         <span slot="title" style="color: black">{{
                           subItem.title
@@ -121,44 +81,27 @@
           <span>{{ username }}，你好！</span>
         </div>
         <div class="back">
-          <i
-            class="fa fa-sign-out line-height-56"
-            @click="logout"
-            style="
+          <i class="fa fa-sign-out line-height-56" @click="logout" style="
               font-size: 25px;
               font-weight: 600;
               position: relative;
               top: 3px;
               cursor: pointer;
-            "
-          ></i>
+            "></i>
         </div>
       </div>
-      <el-dialog
-        :visible.sync="dialogVisible"
-        size="tiny"
-        width="35%"
-        append-to-body
-      >
+      <el-dialog :visible.sync="dialogVisible" size="tiny" width="35%" append-to-body>
         <div class="logout-center">
-          <i
-            class="el-icon-warning-outline"
-            style="color: #f8bb86; font-size: 100px"
-          ></i>
+          <i class="el-icon-warning-outline" style="color: #f8bb86; font-size: 100px"></i>
           <div class="logout-title">提示</div>
           <div class="logout-text">即将退出系统, 是否继续?</div>
         </div>
         <div slot="footer" class="dialog-footer logout-center">
-          <el-button
-            @click="dialogVisible = false"
-            style="width: 16%; height: 40px; font-size: 16px; font-weight: bold"
-            >取 消
+          <el-button @click="dialogVisible = false"
+            style="width: 16%; height: 40px; font-size: 16px; font-weight: bold">取 消
           </el-button>
-          <el-button
-            type="danger"
-            @click="handleConfirm"
-            style="width: 16%; height: 40px; font-size: 16px; font-weight: bold"
-            >确 定
+          <el-button type="danger" @click="handleConfirm"
+            style="width: 16%; height: 40px; font-size: 16px; font-weight: bold">确 定
           </el-button>
         </div>
       </el-dialog>
@@ -192,19 +135,7 @@ export default {
      * this.icon头像路径
      * this.username用户名
      */
-    this.axios({
-      url: 'http://community.byesame.com/users/getUserByToken',
-      method: 'get',
-      data: {},
-      success: (result) => {
-        if (result.type == 1) {
-          this.icon = this.basePath + '/file/' + result.head
-        } else if (result.type == 2) {
-          this.icon = this.basePath + '/file/' + result.head
-        }
-        this.type = result.type
-      }
-    })
+     this.fetchData()
   },
   computed: {
     // 定义变量，利用computed获取变量的值(Vuex)
@@ -216,6 +147,20 @@ export default {
     // this.getParams()
   },
   methods: {
+    async fetchData() {
+      const { data: res } = await this.axios.get("http://community.byesame.com/users/getUserByToken", {
+        params: {
+          token: sessionStorage.token
+        }
+      });
+      console.log(res);
+      if (res.type == 1) {
+        this.icon = 'http://community.byesame.com/file/' + res.head
+      } else if (res.type == 2) {
+        this.icon = 'http://community.byesame.com/file/' + res.head
+      }
+      this.type = res.type
+    },
     // getParams(){
     //   this.username = this.$route.query
     // },

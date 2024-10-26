@@ -42,6 +42,16 @@ const routes = [
         component: () => import('../components/DeviceInfo.vue')
       },
       {
+        path: 'house/add',
+        name: 'Add',
+        component: () => import('../components/Add.vue')
+      },
+      {
+        path: 'house/detail',
+        name: 'Detail',
+        component: () => import('../components/detail.vue')
+      },
+      {
         path: 'parking/parkMessage',
         name: 'ParkMessage',
         component: () => import('../components/ParkMessage.vue')
@@ -102,6 +112,11 @@ const routes = [
         component: () => import('../components/MenuData.vue')
       },
       {
+        path: 'menu/menuSecond',
+        name: 'menuSecond',
+        component: () => import('../components/menuSecond.vue')
+      },
+      {
         path: 'menu/loginData',
         name: 'LoginData',
         component: () => import('../components/LoginData.vue')
@@ -120,6 +135,11 @@ const routes = [
         path: 'personal/joinChat',
         name: 'JoinChat',
         component: () => import('../components/JoinChat.vue')
+      },
+      {
+        path: 'pay/payAdd',
+        name: 'PayAdd',
+        component: () => import('../components/PayAdd.vue')
       }
     ]
   }

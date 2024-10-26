@@ -121,7 +121,13 @@
                   @click="notice(scope.row)"
                   >通知
                 </el-button>
-                <el-button size="mini" plain type="primary">查看</el-button>
+                <el-button
+                  size="mini"
+                  plain
+                  type="primary"
+                  @click="check(scope.row)"
+                  >查看
+                </el-button>
                 <el-button
                   size="mini"
                   plain
@@ -286,7 +292,8 @@ export default {
       },
       notificationData: [],
       dialogTableVisible: false,
-      notificationTotal: 0
+      notificationTotal: 0,
+      PaymentInformation: {}
     }
   },
   methods: {
@@ -352,6 +359,17 @@ export default {
       this.currentPage = 1
       this.getList()
     },
+    // 查看
+    check(row) {
+      this.$router.push({
+        name: 'PayAdd',
+        query: {
+          type: 'DETAIL',
+          id: row.id
+        }
+      })
+    },
+
     // 作废
     setAside(row) {
       this.$confirm('是否作废?', '提示', {
