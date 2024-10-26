@@ -17,10 +17,9 @@
     "vue-axios": "^3.5.2",
     "vue-particles": "^1.0.9",
     "vue-router": "^3.2.0",
-<<<<<<< HEAD
-=======
+
     "vue-ueditor-wrap": "^2.5.6",
->>>>>>> fly
+
     "vuex": "^3.4.0",
     "xlsx": "^0.18.5"
   },

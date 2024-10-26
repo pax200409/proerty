@@ -112,6 +112,11 @@ const routes = [
         component: () => import('../components/MenuData.vue')
       },
       {
+        path: 'menu/menuSecond',
+        name: 'menuSecond',
+        component: () => import('../components/menuSecond.vue')
+      },
+      {
         path: 'menu/loginData',
         name: 'LoginData',
         component: () => import('../components/LoginData.vue')
