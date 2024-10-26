@@ -42,6 +42,16 @@ const routes = [
         component: () => import('../components/DeviceInfo.vue')
       },
       {
+        path: 'house/add',
+        name: 'Add',
+        component: () => import('../components/Add.vue')
+      },
+      {
+        path: 'house/detail',
+        name: 'Detail',
+        component: () => import('../components/detail.vue')
+      },
+      {
         path: 'parking/parkMessage',
         name: 'ParkMessage',
         component: () => import('../components/ParkMessage.vue')

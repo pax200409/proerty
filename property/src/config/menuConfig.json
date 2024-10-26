@@ -8,25 +8,25 @@
   {
     "id": "2",
     "title": "房屋管理",
-    "_key": "/house",
+    "_key": "index/house",
     "prentID": "0",
     "children": [
       {
         "id": "2-1",
         "title": "房屋单元",
-        "_key": "/house/unit",
+        "_key": "/index/house/unit",
         "prentID": "2"
       },
       {
         "id": "2-2",
         "title": "房号管理",
-        "_key": "/house/number",
+        "_key": "/index/house/number",
         "prentID": "2"
       },
       {
         "id": "2-3",
         "title": "房屋设备信息",
-        "_key": "/house/deviceInfo",
+        "_key": "/index/house/deviceInfo",
         "prentID": "2"
       }
     ]
@@ -34,19 +34,19 @@
   {
     "id": "3",
     "title": "车位管理",
-    "_key": "/parking",
+    "_key": "index/parking",
     "prentID": "0",
     "children": [
       {
         "id": "3-1",
         "title": "车位信息",
-        "_key": "/parking/parkMessage",
+        "_key": "/index/parking/parkMessage",
         "prentID": "3"
       },
       {
         "id": "3-2",
         "title": "车位订单",
-        "_key": "/parking/parkPay",
+        "_key": "/index/parking/parkPay",
         "prentID": "3"
       }
     ]
@@ -54,19 +54,19 @@
   {
     "id": "4",
     "title": "计费管理",
-    "_key": "/pay",
+    "_key": "/index/pay",
     "prentID": "0",
     "children": [
       {
         "id": "4-1",
         "title": "缴费类型",
-        "_key": "/pay/payType",
+        "_key": "/index/pay/payType",
         "prentID": "4"
       },
       {
         "id": "4-2",
         "title": "缴费信息",
-        "_key": "/pay/payMessage",
+        "_key": "/index/pay/payMessage",
         "prentID": "4"
       }
     ]
@@ -74,25 +74,25 @@
   {
     "id": "5",
     "title": "服务中心",
-    "_key": "/service",
+    "_key": "/index/service",
     "prentID": "0",
     "children": [
       {
         "id": "5-1",
         "title": "公告信息",
-        "_key": "/service/postMessage",
+        "_key": "/index/service/postMessage",
         "prentID": "5"
       },
       {
         "id": "5-2",
         "title": "维修处理",
-        "_key": "/service/repair",
+        "_key": "/index/service/repair",
         "prentID": "5"
       },
       {
         "id": "5-3",
         "title": "反馈服务",
-        "_key": "/service/feedback",
+        "_key": "/index/service/feedback",
         "prentID": "5"
       }
     ]
@@ -100,25 +100,25 @@
   {
     "id": "6",
     "title": "用户管理",
-    "_key": "/user",
+    "_key": "/index/user",
     "prentID": "0",
     "children": [
       {
         "id": "6-1",
         "title": "普通用户信息",
-        "_key": "/user/userMessage",
+        "_key": "/index/user/userMessage",
         "prentID": "6"
       },
       {
         "id": "6-2",
         "title": "管理员信息",
-        "_key": "/user/adminMessage",
+        "_key": "/index/user/adminMessage",
         "prentID": "6"
       },
       {
         "id": "6-3",
         "title": "用户总表查询",
-        "_key": "/user/Message",
+        "_key": "/index/user/Message",
         "prentID": "6"
       }
     ]
@@ -126,18 +126,19 @@
   {
     "id": "7",
     "title": "菜单管理",
-    "_key": "/menu",
+    "_key": "/index/menu",
     "prentID": "0",
     "children": [
       {
         "id": "7-1",
         "title": "菜单列表",
-        "_key": "/menu/menuData",
+        "_key": "/index/menu/menuData",
         "prentID": "7"
-      },{
+      },
+      {
         "id": "7-2",
         "title": "登录日志",
-        "_key": "/menu/loginData",
+        "_key": "/index/menu/loginData",
         "prentID": "7"
       }
     ]
@@ -145,25 +146,25 @@
   {
     "id": "8",
     "title": "个人中心",
-    "_key": "/personal",
+    "_key": "/index/personal",
     "prentID": "0",
     "children": [
       {
         "id": "8-1",
         "title": "我的信息",
-        "_key": "/personal/message",
+        "_key": "/index/personal/message",
         "prentID": "8"
       },
       {
         "id": "7-2",
         "title": "密码修改",
-        "_key": "/personal/change",
+        "_key": "/index/personal/change",
         "prentID": "8"
       },
       {
         "id": "7-3",
         "title": "小区群聊",
-        "_key": "/personal/joinChat",
+        "_key": "/index/personal/joinChat",
         "prentID": "8"
       }
     ]
