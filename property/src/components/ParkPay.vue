@@ -159,8 +159,6 @@ export default {
       value: true,
 
       value4: '',
-
-
       // 导出
       exportData: [], // 用于存储所有数据
       exportLoading: false, // 加载状态
@@ -338,52 +336,7 @@ export default {
         this.exportLoading = false; // 用户取消操作
       });
     },
-    // 导出
-    // exportAll() {
-    //   this.exportLoading = true;
-    //   this.exportData = []; // 清空数据
-    //   let pageNum = 1; // 初始页码
 
-    //   this.$confirm("确定全量导出excel文件?", "提示", {
-    //     confirmButtonText: "确定",
-    //     cancelButtonText: "取消",
-    //     type: "warning",
-    //   }).then(() => {
-    //     const fetchData = () => {
-    //       this.$Axios({
-    //         url: "parking/getParkOrder",
-    //         method: "get",
-    //         data: {
-    //           parkname: this.parkname,
-    //           orderstatus: this.orderstatus,
-    //           orderpay: this.orderpay,
-    //           currPage: pageNum - 1,
-    //           pageNum: 100 // 每次请求尽可能多的数据
-    //         },
-    //         success: (res) => {
-    //           const newData = res.data.map(item => ({
-    //             ...item,
-    //             startdate: this.formatCreateTime(item.startdate),
-    //             enddate: this.formatCreateTime(item.enddate),
-    //           }));
-    //           this.exportData = [...this.exportData, ...newData];
-    //           pageNum++;
-    //           if (res.total > pageNum * 100) {
-    //             // 如果还有更多数据，则继续请求下一页
-    //             fetchData();
-    //           } else {
-    //             // 所有数据获取完毕，开始导出Excel文件
-    //             this.exportToExcel();
-    //           }
-    //         }
-    //       });
-    //     };
-
-    //     fetchData(); // 开始获取数据
-    //   }).catch(() => {
-    //     this.exportLoading = false; // 用户取消操作
-    //   });
-    // },
     // 将数据导出为Excel文件
     exportToExcel() {
       const worksheet = XLSX.utils.json_to_sheet(this.exportData);
