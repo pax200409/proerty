@@ -289,7 +289,7 @@ export default {
   }
 
   .top2 {
-    margin-left: 20px;
+    margin-left: 280px;
   }
 
   .btn {
