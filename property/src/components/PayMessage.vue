@@ -251,6 +251,7 @@ export default {
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')
       XLSX.writeFile(workbook, 'data.xlsx')
     },
+    // 查询
     getContributions() {
       this.contributionsData.startDate = this.queryTime[0]
       this.contributionsData.endDate = this.queryTime[1]
