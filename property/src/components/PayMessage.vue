@@ -293,6 +293,7 @@ export default {
           this.getListOfContributions()
         })
     },
+    // 死循环
     delay(time) {
       return Promise.resolve(undefined).then(
         () => new Promise((resolve) => setTimeout(resolve, time))
