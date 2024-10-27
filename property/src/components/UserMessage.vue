@@ -5,14 +5,11 @@
                 <el-option v-for="item in valueList" :key="item.value" :label="item.text" :value="item.value">
                 </el-option>
             </el-select>
-            <!-- <el-input v-model="context" placeholder="请输入查询内容"></el-input>
-            <el-button type="primary" icon="el-icon-search" @click="search" style="margin-left: 20px" class="button1">查询</el-button>
-            <el-button type="success" icon="el-icon-plus" @click="add()" class="button2">新增</el-button>
-            <el-button type="primary" icon="el-icon-refresh-right" @click="reset" class="button3">重置</el-button> -->
             <el-input v-model="context" placeholder="请输入查询内容"></el-input>
-            <el-button type="primary" icon="el-icon-search" style="margin-left: 20px" class="button1">查询</el-button>
-            <el-button type="success" icon="el-icon-plus" class="button2">新增</el-button>
-            <el-button type="primary" icon="el-icon-refresh-right" class="button3">重置</el-button>
+            <el-button type="primary" icon="el-icon-search" @click="search" style="margin-left: 20px"
+                class="button1">查询</el-button>
+            <el-button type="success" icon="el-icon-plus" @click="add()" class="button2">新增</el-button>
+            <el-button type="primary" icon="el-icon-refresh-right" @click="reset" class="button3">重置</el-button>
         </div>
         <div class="list">
             <el-table ref="multipleTable" :data="tableData" border stripe align="center" tooltip-effect="dark"
@@ -36,14 +33,16 @@
                 <el-table-column prop="type" label="类型" width="130" :formatter="typeFormatter" align="center">
                 </el-table-column>
                 <el-table-column prop="" label="操作" width="206" align="center">
-                    <template>
-                        <!-- <template slot-scope="scope"> -->
+                    <template slot-scope="scope">
                         <div style="display: flex;margin-left: 13px">
-                            <el-button :plain="true" size="mini" style="background-color: #fff;font-size: 12px">
+                            <el-button :plain="true" size="mini" style="background-color: #fff;font-size: 12px"
+                                @click="edit(scope.row)">
                                 编辑</el-button><el-button :plain="true" size="mini"
-                                style="color: #62a8ea;background-color: #fff;font-size: 12px">
+                                style="color: #62a8ea;background-color: #fff;font-size: 12px"
+                                @click="detail(scope.row)">
                                 详情</el-button><el-button :plain="true" size="mini"
-                                style="font-size: 12px;color: black;background-color: #fff" type="danger">
+                                style="font-size: 12px;color: black;background-color: #fff" type="danger"
+                                @click="deleteData(scope.row)">
                                 删除</el-button>
                         </div>
                     </template>
@@ -56,17 +55,17 @@
                 </el-pagination>
             </div>
         </div>
-        <!-- <add-dialog ref="addDialog"></add-dialog> -->
+        <add-dialog ref="addDialog"></add-dialog>
     </div>
 </template>
 
 <script>
-// import addDialog from "./addDialog"
+import addDialog from "./addDialog"
 export default {
     name: "userIndex",
-    // components:{
-    //   addDialog
-    // },
+    components: {
+        addDialog
+    },
     data() {
         return {
             nickname: '',
@@ -121,6 +120,7 @@ export default {
             this.getData()
             this.search()
         },
+        // 获取用户表信息
         async getData() {
             const { data: res } = await this.axios.get("http://community.byesame.com/users/getUsersByTypePage", {
                 params: {
@@ -132,6 +132,82 @@ export default {
             console.log(res);
             this.tableData = res.data;
             this.total = res.total
+        },
+        // 查询
+        search() {
+            this.axios({
+                url: 'http://community.byesame.com/admin/getUserByTypeChar',
+                method: 'get',
+                params: {
+                    type: 2,
+                    inputText: this.context,
+                    CharType: this.value,
+                    pageNum: this.pageSize,
+                    currPage: this.cur_page - 1,
+                },
+                token: sessionStorage.token
+            }).then((res) => {
+                this.tableData = res.data.data
+                this.total = res.data.total
+            })
+        },
+        // 新增
+        add() {
+            this.$nextTick(() => {
+                this.$refs.dialogTitleName = "新增"
+                this.$refs.addDialog.actionType = "add";
+                this.$refs.addDialog.dialogTableVisible = true;
+                this.$refs.addDialog.formData = Object.assign({})
+            });
+        },
+        // 重置
+        reset() {
+            this.getData();
+            this.value = '';
+            this.context = '';
+        },
+        // 编辑
+        edit(row) {
+            console.log(row, '行')
+            this.$refs.addDialog.actionType = "edit";
+            this.$refs.addDialog.dialogTableVisible = true;
+            this.$refs.addDialog.init(row)
+
+        },
+        // 详情
+        detail(row) {
+            this.$refs.addDialog.dialogTableVisible = true;
+            this.$refs.addDialog.actionType = "detail";
+            this.$refs.addDialog.formData = Object.assign(row)
+        },
+        // 删除
+        deleteData(row) {
+            this.$confirm('是否删除?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                const u_id = row.id;
+                this.axios({
+                    url: 'http://community.byesame.com/users/delUserData',
+                    method: 'get',
+                    params: {
+                        u_id,
+                    },
+                    token: sessionStorage.token,
+                }).then((res) => {
+                    if (res) {
+                        this.getData()
+                        this.$message({
+                            showClose: true,
+                            message: '删除用户成功',
+                            type: 'warning'
+                        });
+                    }
+                })
+            }).catch((reason) => {
+                alert('删除失败' + reason)
+            })
         },
         // 类型转文字
         typeFormatter(row) {

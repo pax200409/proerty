@@ -178,8 +178,7 @@ export default {
       this.$confirm("确定提交信息?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消"
-      })
-        .then(() => {
+      }).then(() => {
           this.axios({
             url: 'http://community.byesame.com/house/updateunitList',
             method: 'post',
