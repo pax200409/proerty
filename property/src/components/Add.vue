@@ -53,7 +53,7 @@
 </template>
 
 <script>
-// import VueUeditorWrap from 'vue-ueditor-wrap'; // 引入 vue-ueditor-wrap
+// import VueUeditorWrap from "vue-ueditor-wrap";
 
 export default {
     name: "text_f",
@@ -86,7 +86,7 @@ export default {
                     { required: true, message: "状态不能为空", trigger: "blur" }
                 ]
             },
-            // // 富文本
+            // 富文本
             // ruleForm2: {
             //     content: ""
             // },
@@ -98,12 +98,12 @@ export default {
             //     // 初始容器高度
             //     initialFrameHeight: 300,
             //     // 初始容器宽度
-            //     initialFrameWidth: 400,
+            //     initialFrameWidth: "100%",
             //     // 上传文件接口
             //     enableAutoSave: false,
             //     // 上传文件接口
             //     // serverUrl: this.$axios.defaults.baseURL + '/mh/ueditor/config',
-            //     serverUrl: "http://community.byesame.com/mh/ueditor/config",
+            //     serverUrl: "http://112.6.99.125:7013/safetyPatrol/mh/ueditor/config",
             //     elementPathEnable: false,
             //     wordCount: false
             // }
@@ -125,7 +125,7 @@ export default {
                             unitname: this.ruleForm.unitname,
                             unitnum: this.ruleForm.unitnum,
                             unitstatus: this.ruleForm.unitstatus,
-                            unitcontext: this.ruleForm2.content,
+                            unitcontext: '',
                             token: sessionStorage.toekn
                         }
                     }).then(res => {
@@ -187,7 +187,7 @@ export default {
     }
 
     .top2 {
-        margin-left: 280px;
+        margin-left: 20px;
     }
 
     .btn {
