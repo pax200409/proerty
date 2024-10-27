@@ -22,6 +22,8 @@ Vue.use(VueAxios, axios)
 
 // 富文本插件
 import VueUeditorWrap from 'vue-ueditor-wrap'; // 引入 vue-ueditor-wrap 插件
+Vue.config.productionTip = false;
+Vue.component('vue-ueditor-wrap', VueUeditorWrap); // 全局注册
 
 Vue.use(VueUeditorWrap);
 Vue.prototype.UEDITOR_HOME_URL = '/static/ueditor/';
