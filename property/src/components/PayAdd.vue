@@ -23,7 +23,7 @@
             {{ formIdData.username }}
           </el-form-item>
           <el-form-item label="通知内容：">
-            {{ formIdData.paycontent }}
+            <span v-html="formIdData.paycontent"></span>
           </el-form-item>
         </el-form>
       </el-tabs>
@@ -164,14 +164,10 @@ export default {
         )
         .then((res) => {
           console.log(res)
-          res.data[0].paycontent = this.stripPTags(res.data[0].paycontent)
           this.formIdData = Array.isArray(res.data)
             ? res.data[0] || {}
             : res.data
         })
-    },
-    stripPTags(inputString) {
-      return inputString.replace(/^<p>|<\/p>$/g, '')
     },
     addNotice() {
       this.$confirm('确认保存计费信息？', '提示', {

@@ -145,6 +145,21 @@ const routes = [
         path: 'pay/payAdd',
         name: 'PayAdd',
         component: () => import('../components/PayAdd.vue')
+      },
+      {
+        path: 'pay/payDetail',
+        name: 'PayDetail',
+        component: () => import('../components/PayDetail.vue')
+      },
+      {
+        path: 'service/smartRepair',
+        name: 'SmartRepair',
+        component: () => import('../components/SmartRepair.vue')
+      },
+      {
+        path: 'service/houseRepair',
+        name: 'HouseRepair',
+        component: () => import('../components/HouseRepair.vue')
       }
     ]
   }
