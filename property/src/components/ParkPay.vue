@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="box">
     <div class="top">
       <el-input v-model="parkname" placeholder="车位名称"></el-input>
