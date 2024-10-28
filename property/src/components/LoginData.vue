@@ -7,8 +7,7 @@
         </el-option>
       </el-select>
       <el-date-picker v-model="value2" type="daterange" align="right" unlink-panels range-separator="至"
-
-      start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions" style="width: 25%;">
+        start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions" style="width: 25%;">
       </el-date-picker>
       <el-button type="primary" icon="el-icon-search" style="width: 8%; font-size: 14px; margin-left: 10px;"
         @click="search">查询</el-button>
@@ -30,8 +29,7 @@
             </el-table-column>
             <el-table-column label="操作" min-width="163">
               <template slot-scope="scope">
-                <el-button style="background-color: red;color: white;"
-                  @click="handleDetele(scope.row.id)">删除记录</el-button>
+                <el-button style="background-color: red;color: white;" @click="deleteData(scope.row)">删除记录</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -130,28 +128,36 @@ export default {
       this.total = res.total
     },
     // 删除
-    handleDetele(id) {
-      this.$confirm("确定删除该条登录信息？", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      }).then(() => {
-        this.axios.get('http://community.byesame.com/users/delLoginData',{
-          pramas:{
-            id:id
-          },
-          token: sessionStorage.token
-        })
-        this.$message.success('作废成功')
-        this.handleGetList()
-      })
-      .catch(() => {
-          this.$message.error('作废失败')
-          this.handleGetList()
-        })
-    },
+    deleteData(row) {
+            this.$confirm('是否删除?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+              const u_id = row.id
+                this.axios({
+                    url: 'http://community.byesame.com/users/delUserData',
+                    method: 'get',
+                    params: {
+                        u_id,
+                        token: sessionStorage.token,
+                    },
+                }).then((res) => {
+                    if (res) {
+                        this.handleGetList()
+                        this.$message({
+                            showClose: true,
+                            message: '删除用户成功',
+                            type: 'warning'
+                        });
+                    }
+                })
+            }).catch((reason) => {
+                alert('删除失败' + reason)
+            })
+        },
 
-    search(){ },
+    search() { },
 
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
@@ -183,7 +189,7 @@ export default {
   .top {
     display: flex;
     justify-content: left;
-
+    margin-top: 10px;
 
   }
 
