@@ -128,11 +128,6 @@ const routes = [
         component: () => import('../components/Change.vue')
       },
       {
-        path: 'personal/joinChat',
-        name: 'JoinChat',
-        component: () => import('../components/JoinChat.vue')
-      },
-      {
         path: 'pay/payAdd',
         name: 'PayAdd',
         component: () => import('../components/PayAdd.vue')
@@ -158,6 +153,11 @@ const routes = [
         component: () => import('../components/Message.vue')
       }
     ]
+  },
+  {
+    path: '/personal/joinChat',
+    name: 'JoinChat',
+    component: () => import('../components/JoinChat.vue')
   }
 ]
 
