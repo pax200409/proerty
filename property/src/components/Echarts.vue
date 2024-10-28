@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div style="background-color: #e8e8e8">
     <el-row :gutter="20" style="margin: 0">
       <!-- 上方滚动条 -->
@@ -47,9 +46,14 @@
             border-radius: 8px;
             margin: 5px;
             background-color: #fff;
+            line-height: 100px;
+            text-align: center;
           "
         >
-          <i class="el-icon-user-solid"></i>
+          <i
+            class="el-icon-user-solid"
+            style="color: #389af9; font-size: 66px"
+          ></i>
           <span style="font-size: 32px; font-weight: bold">{{
             UsersData
           }}</span>
@@ -64,9 +68,14 @@
             border-radius: 8px;
             margin: 5px;
             background-color: #fff;
+            line-height: 100px;
+            text-align: center;
           "
         >
-          <i class="el-icon-user-solid"></i>
+          <i
+            class="el-icon-document"
+            style="color: #aee86a; font-size: 66px"
+          ></i>
           <span style="font-size: 32px; font-weight: bold">{{
             payMessage
           }}</span>
@@ -81,9 +90,11 @@
             border-radius: 8px;
             margin: 5px;
             background-color: #fff;
+            line-height: 100px;
+            text-align: center;
           "
         >
-          <i class="el-icon-user-solid"></i>
+          <i class="el-icon-truck" style="color: #f2b90e; font-size: 66px"></i>
           <span style="font-size: 32px; font-weight: bold">{{
             ParkOrder
           }}</span>
@@ -98,9 +109,14 @@
             border-radius: 8px;
             margin: 5px;
             background-color: #fff;
+            line-height: 100px;
+            text-align: center;
           "
         >
-          <i class="el-icon-user-solid"></i>
+          <i
+            class="el-icon-edit-outline"
+            style="color: #b28b7c; font-size: 66px"
+          ></i>
           <span style="font-size: 32px; font-weight: bold">{{ FeedBack }}</span>
           <span>用户反馈数量</span>
         </div>
@@ -208,113 +224,6 @@
       </el-col>
     </el-row>
   </div>
-=======
-  <el-row :gutter="20" style="margin: 0">
-    <!-- 上方滚动条 -->
-    <el-col :span="24">
-      <div
-        class="grid-content bg-purple-dark"
-        style="height: 56px; background-color: #ccc"
-      ></div>
-    </el-col>
-    <!-- 下方四个卡片 -->
-    <el-col :span="6">
-      <div
-        class="grid-content bg-purple"
-        style="
-          background-color: #ccc;
-          height: 100px;
-          border-radius: 8px;
-          margin: 10px;
-        "
-      >
-        <i class="el-icon-user-solid"></i>
-        <span style="font-size: 32px; font-weight: bold">{{ UsersData }}</span>
-        <span>系统用户数</span>
-      </div>
-    </el-col>
-    <el-col :span="6">
-      <div
-        class="grid-content bg-purple"
-        style="
-          background-color: #ccc;
-          height: 100px;
-          border-radius: 8px;
-          margin: 10px;
-        "
-      >
-        <i class="el-icon-user-solid"></i>
-        <span style="font-size: 32px; font-weight: bold">{{ payMessage }}</span>
-        <span>计费订单数量</span>
-      </div>
-    </el-col>
-    <el-col :span="6">
-      <div
-        class="grid-content bg-purple"
-        style="
-          background-color: #ccc;
-          height: 100px;
-          border-radius: 8px;
-          margin: 10px;
-        "
-      >
-        <i class="el-icon-user-solid"></i>
-        <span style="font-size: 32px; font-weight: bold">{{ ParkOrder }}</span>
-        <span>车位数量</span>
-      </div>
-    </el-col>
-    <el-col :span="6">
-      <div
-        class="grid-content bg-purple"
-        style="
-          background-color: #ccc;
-          height: 100px;
-          border-radius: 8px;
-          margin: 10px;
-        "
-      >
-        <i class="el-icon-user-solid"></i>
-        <span style="font-size: 32px; font-weight: bold">{{ FeedBack }}</span>
-        <span>用户反馈数量</span>
-      </div>
-    </el-col>
-    <!-- 小区分布统计 -->
-    <el-col :span="8">
-      <div
-        class="grid-content bg-purple"
-        style="
-          background-color: #ccc;
-          height: 300px;
-          border-radius: 8px;
-          margin: 10px;
-        "
-      ></div>
-    </el-col>
-    <el-col :span="8">
-      <div
-        class="grid-content bg-purple"
-        style="
-          background-color: #ccc;
-          height: 300px;
-          border-radius: 8px;
-          margin: 10px;
-        "
-        id="Community"
-      ></div>
-    </el-col>
-    <el-col :span="8">
-      <div
-        class="grid-content bg-purple"
-        style="
-          background-color: #ccc;
-          height: 300px;
-          border-radius: 8px;
-          margin: 10px;
-        "
-      ></div>
-    </el-col>
-  </el-row>
->>>>>>> b0d5195aa589ccabc8344205290a218429f95cde
 </template>
 
 <script>
@@ -323,6 +232,8 @@ import * as echarts from "echarts";
 export default {
   data() {
     return {
+      banText: [],
+      currentIndex: 0, // 当前显示的公告索引
       UsersData: "",
       payMessage: "",
       ParkOrder: "",
@@ -341,6 +252,29 @@ export default {
         d2: "",
         d3: "",
       },
+      distributionData: {
+        valueA: "10",
+        valueB: "20",
+        valueC: "30",
+        valueD: "40",
+      },
+      radarData: {
+        a1: "",
+        a2: "",
+        a3: "",
+        a4: "",
+        a5: "",
+        a6: "",
+      },
+      accessData: {
+        a1: "",
+        a2: "",
+        a3: "",
+        a4: "",
+        a5: "",
+        a6: "",
+      },
+      tableData: [],
     };
   },
   mounted() {
@@ -360,7 +294,6 @@ export default {
     this.getEchartsDatad1();
     this.getEchartsDatad2();
     this.getEchartsDatad3();
-<<<<<<< HEAD
     this.getDistributionDataA();
     this.getDistributionDataB();
     this.getDistributionDataC();
@@ -379,12 +312,49 @@ export default {
     this.initEchartsthree();
     this.initEchartsfour();
     // 初始化 ECharts
-=======
-    this.initEcharts(); // 初始化 ECharts
->>>>>>> b0d5195aa589ccabc8344205290a218429f95cde
     //调用a1的数据
   },
   methods: {
+    getList() {
+      this.axios
+        .get(
+          "http://community.byesame.com/poster/getPosterData?currPage=0&pageNum=100",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((response) => {
+          const res = response.data; // 获取响应数据
+          res.data.forEach((item) => {
+            item.createtime = this.formatTime(item.createtime); // 格式化时间
+          });
+          this.banText = res.data; // 将数据赋值给 banText
+          console.log(this.banText);
+          this.startCarousel(); // 启动轮播
+        })
+        .catch((error) => {
+          console.error("Error fetching poster data:", error); // 处理错误
+        });
+    },
+    // 启动定时轮播公告
+    startCarousel() {
+      this.intervalId = setInterval(() => {
+        this.currentIndex = (this.currentIndex + 1) % this.banText.length;
+      }, 3000); // 每3秒轮播一次
+    },
+    formatTime(timeStr) {
+      const date = new Date(timeStr);
+      const year = date.getFullYear();
+      const month = ("0" + (date.getMonth() + 1)).slice(-2);
+      const day = ("0" + date.getDate()).slice(-2);
+      const hours = ("0" + date.getHours()).slice(-2);
+      const minutes = ("0" + date.getMinutes()).slice(-2);
+      const seconds = ("0" + date.getSeconds()).slice(-2);
+      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    },
+    // 获取用户数据
     getUsersData() {
       this.axios
         .get(
@@ -402,6 +372,7 @@ export default {
           console.log(err);
         });
     },
+    // 获取计费订单数量
     getpayMessage() {
       this.axios
         .get(
@@ -419,6 +390,7 @@ export default {
           console.log(err);
         });
     },
+    // 获取车位数量
     getpayParkOrder() {
       this.axios
         .get(
@@ -436,6 +408,7 @@ export default {
           console.log(err);
         });
     },
+    // 获取用户反馈数量
     getFeedBack() {
       this.axios
         .get(
@@ -453,8 +426,48 @@ export default {
           console.log(err);
         });
     },
-    // 初始化Echarts
-    initEcharts() {
+    // 初始化第一个Echarts
+    initEchartsone() {
+      const chartDom = document.getElementById("distribution");
+      const myChart = echarts.init(chartDom);
+      const option = {
+        title: {
+          text: "小区分布统计",
+          subtext: "",
+          left: "center",
+        },
+        tooltip: {
+          trigger: "item",
+        },
+        legend: {
+          orient: "vertical",
+          left: "left",
+        },
+        series: [
+          {
+            name: "小区分布",
+            type: "pie",
+            radius: "50%",
+            data: [
+              { value: this.distributionData.valueA, name: "A区" },
+              { value: this.distributionData.valueB, name: "B区" },
+              { value: this.distributionData.valueC, name: "C区" },
+              { value: this.distributionData.valueD, name: "D区" },
+            ],
+          },
+        ],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+      };
+      option && myChart.setOption(option);
+    },
+    // 初始化第二个Echarts
+    initEchartstwo() {
       const chartDom = document.getElementById("Community");
       const myChart = echarts.init(chartDom);
       const option = {
@@ -476,7 +489,160 @@ export default {
 
       option && myChart.setOption(option);
     },
-    // 调用Echarts中的动态数据
+    // 初始化第三个Echarts
+    initEchartsthree() {
+      const chartDom = document.getElementById("Project");
+      const myChart = echarts.init(chartDom);
+      const option = {
+        title: {
+          text: "缴费项目订单",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        legend: {
+          data: ["计费项目"],
+        },
+        radar: {
+          // shape: 'circle', // 雷达图绘制类型，支持 'polygon' 和 'circle'。
+          indicator: [
+            { name: "电费单", max: 50 },
+            { name: "定月单", max: 50 },
+            { name: "按量单", max: 50 },
+            { name: "天然气单", max: 50 },
+            { name: "物业费", max: 50 },
+            { name: "宽带费", max: 50 },
+          ],
+        },
+        series: [
+          {
+            name: "Budget vs spending",
+            type: "radar",
+            data: [
+              {
+                value: [
+                  this.radarData.a1,
+                  this.radarData.a2,
+                  this.radarData.a3,
+                  this.radarData.a4,
+                  this.radarData.a5,
+                  this.radarData.a6,
+                ],
+                name: "计费项目",
+              },
+            ],
+          },
+        ],
+      };
+      option && myChart.setOption(option);
+    },
+    // 初始化第四个Echarts
+    initEchartsfour() {
+      const chartDom = document.getElementById("access");
+      const myChart = echarts.init(chartDom);
+      const option = {
+        title: {
+          text: "当月用户访问情况",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        xAxis: {
+          type: "category",
+          data: Array.from({ length: 31 }, (_, i) =>
+            (i + 1).toString().padStart(1, "0")
+          ), // 从01到31的天数
+        },
+        yAxis: {
+          type: "value",
+        },
+        series: [
+          {
+            data: Array(31).fill(0), // 初始化为零
+            type: "line",
+            smooth: true,
+          },
+        ],
+      };
+      myChart.setOption(option);
+    },
+    getDistributionDataA() {
+      this.axios
+        .get(
+          "http://community.byesame.com/house/searchList?unitname=A&currPage=1&pageNum=4",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data.total);
+          this.distributionData.valueA = res.data.total;
+          // this.initEchartsone();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getDistributionDataB() {
+      this.axios
+        .get(
+          "http://community.byesame.com/house/searchList?unitname=B&currPage=1&pageNum=4",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data.total);
+          this.distributionData.valueB = res.data.total;
+          // this.initEchartsone();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getDistributionDataC() {
+      this.axios
+        .get(
+          "http://community.byesame.com/house/searchList?unitname=C&currPage=1&pageNum=4",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data.total);
+          this.distributionData.valueC = res.data.total;
+          // this.initEchartsone();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getDistributionDataD() {
+      this.axios
+        .get(
+          "http://community.byesame.com/house/searchList?unitname=D&currPage=1&pageNum=4",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data.total);
+          this.distributionData.valueD = res.data.total;
+          this.initEchartsone();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // 第二个Echarts图中的数据
     getEchartsDataa1() {
       this.axios
         .get(
@@ -490,7 +656,7 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.a1 = res.data.total;
-          this.initEcharts();
+          // this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
@@ -509,7 +675,7 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.a2 = res.data.total;
-          this.initEcharts();
+          // this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
@@ -528,7 +694,7 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.a3 = res.data.total;
-          this.initEcharts();
+          // this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
@@ -547,7 +713,7 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.b1 = res.data.total;
-          this.initEcharts();
+          // this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
@@ -566,7 +732,7 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.b2 = res.data.total;
-          this.initEcharts();
+          // this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
@@ -585,7 +751,7 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.b3 = res.data.total;
-          this.initEcharts();
+          // this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
@@ -604,7 +770,7 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.c1 = res.data.total;
-          this.initEcharts();
+          // this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
@@ -623,7 +789,7 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.c2 = res.data.total;
-          this.initEcharts();
+          // this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
@@ -642,7 +808,7 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.c3 = res.data.total;
-          this.initEcharts();
+          // this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
@@ -661,7 +827,7 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.d1 = res.data.total;
-          this.initEcharts();
+          // this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
@@ -680,7 +846,7 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.d2 = res.data.total;
-          this.initEcharts();
+          // this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
@@ -699,11 +865,227 @@ export default {
         .then((res) => {
           console.log(res.data.total);
           this.chartData.d3 = res.data.total;
-          this.initEcharts();
+          this.initEchartstwo();
         })
         .catch((err) => {
           console.log(err);
         });
+    },
+    // 第三个Echarts图中的数据
+    getEchartsDatathree1() {
+      this.axios
+        .get(
+          "http://community.byesame.com/cost/getCostData?c_id=7&currPage=0&pageNum=4",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data.total);
+          this.radarData.a1 = res.data.total;
+          // this.initEchartsthree();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getEchartsDatathree2() {
+      this.axios
+        .get(
+          "http://community.byesame.com/cost/getCostData?c_id=8&currPage=0&pageNum=4",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data.total);
+          this.radarData.a2 = res.data.total;
+          // this.initEchartsthree();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getEchartsDatathree3() {
+      this.axios
+        .get(
+          "http://community.byesame.com/cost/getCostData?c_id=9&currPage=0&pageNum=4",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data.total);
+          this.radarData.a3 = res.data.total;
+          // this.initEchartsthree();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getEchartsDatathree4() {
+      this.axios
+        .get(
+          "http://community.byesame.com/cost/getCostData?c_id=10&currPage=0&pageNum=4",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data.total);
+          this.radarData.a4 = res.data.total;
+          // this.initEchartsthree();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getEchartsDatathree5() {
+      this.axios
+        .get(
+          "http://community.byesame.com/cost/getCostData?c_id=11&currPage=0&pageNum=4",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data.total);
+          this.radarData.a5 = res.data.total;
+          // this.initEchartsthree();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getEchartsDatathree6() {
+      this.axios
+        .get(
+          "http://community.byesame.com/cost/getCostData?c_id=12&currPage=0&pageNum=4",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data.total);
+          this.radarData.a6 = res.data.total;
+          this.initEchartsthree();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // 第四个Echarts图中的数据
+    getEchartsDatafour() {
+      this.axios
+        .get("http://community.byesame.com/users/getLoginMonth", {
+          headers: {
+            token: sessionStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          const times = res.data.map((item) => item.createtime);
+          const now = new Date();
+          const currentMonth = now.getMonth();
+          const currentYear = now.getFullYear();
+          const dayCount = Array(31).fill(0); // 为每一天初始化计数
+
+          times.forEach((dateString) => {
+            const date = new Date(dateString);
+            // 检查日期是否在当前月份和年份
+            if (
+              date.getMonth() === currentMonth &&
+              date.getFullYear() === currentYear
+            ) {
+              const day = date.getDate();
+              dayCount[day - 1]++; // 增加特定天的计数
+            }
+          });
+          console.log(dayCount);
+
+          // 用新数据更新图表
+          const chartDom = document.getElementById("access");
+          const myChart = echarts.getInstanceByDom(chartDom);
+          myChart.setOption({
+            series: [
+              {
+                data: dayCount, // 使用统计好的每一天的登录次数
+              },
+            ],
+          });
+        })
+        .catch((err) => {
+          console.error("获取数据时出错:", err);
+        });
+    },
+    // 筛选日期和状态
+    formatter(row) {
+      return row.address;
+    },
+    filterTag(value, row) {
+      return row.tag === value;
+    },
+    filterHandler(value, row, column) {
+      const property = column["property"];
+      return row[property] === value;
+    },
+    // 获取维修订单的数据
+    getorderData() {
+      this.axios
+        .get(
+          "http://community.byesame.com/poster/getRepairData?currPage=0&pageNum=4",
+          {
+            headers: {
+              token: sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data); // 输出整个响应
+          const orderData = res.data.data.map((item) => {
+            return {
+              date: this.formatDate(item.createtime), // 格式化日期
+              name: item.repaircontent,
+              tag: item.resultstatus === 1 ? "已维修" : "未维修", // 根据 resultstatus 设置状态
+            };
+          });
+          console.log(orderData); // 输出转换后的数据
+
+          // 将 orderData 赋值给 tableData
+          this.tableData = orderData; // 直接赋值
+          console.log(this.tableData); // 确保 tableData 被正确赋值
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    // 格式化日期的方法
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      if (isNaN(date)) {
+        console.error("Invalid date:", dateString); // 打印错误信息
+        return dateString; // 返回原始字符串以防格式化失败
+      }
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0"); // 月份从0开始
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+
+      return `${year}-${month}-${day} ${hours}:${minutes}`;
     },
   },
 };
@@ -714,7 +1096,6 @@ export default {
   height: 300px; /* 确保有高度 */
   width: 100%; /* 确保有宽度 */
 }
-<<<<<<< HEAD
 .poster {
   left: 0;
   width: 100%;
@@ -776,6 +1157,4 @@ export default {
   padding: 10px;
   box-sizing: border-box;
 }
-=======
->>>>>>> b0d5195aa589ccabc8344205290a218429f95cde
 </style>
