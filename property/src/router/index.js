@@ -106,11 +106,7 @@ const routes = [
         name: 'AdminMessage',
         component: () => import('../components/AdminMessage.vue')
       },
-      {
-        path: 'user/Message',
-        name: 'Message',
-        component: () => import('../components/Message.vue')
-      },
+
       {
         path: 'menu/menuData',
         name: 'MenuData',

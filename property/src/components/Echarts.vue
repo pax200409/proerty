@@ -1,154 +1,212 @@
 <template>
-  <el-row :gutter="20" style="margin: 0">
-    <!-- 上方滚动条 -->
-    <div class="poster">
-      <div>
-        <span
+  <div style="background-color: #e8e8e8">
+    <el-row :gutter="20" style="margin: 0">
+      <!-- 上方滚动条 -->
+      <div class="poster">
+        <div>
+          <span
+            style="
+              color: #389af9;
+              font-weight: 700;
+              font-size: 14px;
+              padding: 18px;
+            "
+          >
+            <i class="el-icon-message-solid"></i>
+            最新公告
+          </span>
+        </div>
+        <!-- 轮播公告 -->
+        <div class="newPost">
+          <transition-group name="slide-up" tag="ul" class="post-list">
+            <router-link
+              to="service/postMessage"
+              tag="li"
+              v-for="(item, index) in banText"
+              :key="item.p_id"
+              class="post-item slide-up-item"
+              v-show="index === currentIndex"
+            >
+              <span>{{ item.title }}</span>
+              <span>{{ item.content }}</span>
+              <span>
+                {{ item.createtime }}
+                <span style="color: #389af9; margin-left: 5px">更多</span>
+              </span>
+            </router-link>
+          </transition-group>
+        </div>
+      </div>
+      <!-- 下方四个卡片 -->
+      <el-col :span="6">
+        <div
+          class="grid-content bg-purple"
           style="
-            color: #389af9;
-            font-weight: 700;
-            font-size: 14px;
-            padding: 18px;
+            height: 100px;
+            border-radius: 8px;
+            margin: 5px;
+            background-color: #fff;
           "
         >
-          <i class="el-icon-message-solid"></i>
-          最新公告
-        </span>
-      </div>
-      <!-- 轮播公告 -->
-      <div class="newPost">
-        <transition-group name="slide-up" tag="ul" class="post-list">
-          <router-link
-            to="/service/postMessage"
-            tag="li"
-            v-for="(item, index) in banText"
-            :key="item.p_id"
-            class="post-item slide-up-item"
-            v-show="index === currentIndex"
-          >
-            <span>{{ item.title }}</span>
-            <span>{{ item.content }}</span>
-            <span>
-              {{ item.createtime }}
-              <span style="color: #389af9; margin-left: 5px">更多</span>
-            </span>
-          </router-link>
-        </transition-group>
-      </div>
-    </div>
-    <!-- 下方四个卡片 -->
-    <el-col :span="6">
-      <div
-        class="grid-content bg-purple"
-        style="height: 100px; border-radius: 8px; margin: 10px"
-      >
-        <i class="el-icon-user-solid"></i>
-        <span style="font-size: 32px; font-weight: bold">{{ UsersData }}</span>
-        <span>系统用户数</span>
-      </div>
-    </el-col>
-    <el-col :span="6">
-      <div
-        class="grid-content bg-purple"
-        style="height: 100px; border-radius: 8px; margin: 10px"
-      >
-        <i class="el-icon-user-solid"></i>
-        <span style="font-size: 32px; font-weight: bold">{{ payMessage }}</span>
-        <span>计费订单数量</span>
-      </div>
-    </el-col>
-    <el-col :span="6">
-      <div
-        class="grid-content bg-purple"
-        style="height: 100px; border-radius: 8px; margin: 10px"
-      >
-        <i class="el-icon-user-solid"></i>
-        <span style="font-size: 32px; font-weight: bold">{{ ParkOrder }}</span>
-        <span>车位数量</span>
-      </div>
-    </el-col>
-    <el-col :span="6">
-      <div
-        class="grid-content bg-purple"
-        style="height: 100px; border-radius: 8px; margin: 10px"
-      >
-        <i class="el-icon-user-solid"></i>
-        <span style="font-size: 32px; font-weight: bold">{{ FeedBack }}</span>
-        <span>用户反馈数量</span>
-      </div>
-    </el-col>
-    <!-- 小区分布统计 -->
-    <el-col :span="8">
-      <div
-        class="grid-content bg-purple"
-        style="height: 300px; border-radius: 8px; margin: 10px"
-        id="distribution"
-      ></div>
-    </el-col>
-    <!-- 车位数、已分配、已缴费 -->
-    <el-col :span="8">
-      <div
-        class="grid-content bg-purple"
-        style="height: 300px; border-radius: 8px; margin: 10px"
-        id="Community"
-      ></div>
-    </el-col>
-    <!-- 缴费项目订单 -->
-    <el-col :span="8">
-      <div
-        class="grid-content bg-purple"
-        style="height: 300px; border-radius: 8px; margin: 10px"
-        id="Project"
-      ></div>
-    </el-col>
-    <el-col :span="17">
-      <div
-        class="grid-content bg-purple"
-        style="height: 300px; border-radius: 8px; margin: 10px"
-        id="access"
-      ></div>
-    </el-col>
-    <!-- 维修订单 -->
-    <el-col :span="7">
-      <div
-        class="grid-content bg-purple"
-        style="height: 300px; border-radius: 8px; margin: 10px"
-        id="Project"
-      >
-        <template>
-          <el-table
-            ref="filterTable"
-            :data="tableData"
-            style="width: 100%; font-size: 12px"
-          >
-            <el-table-column prop="name" label="维修内容" width="180">
-            </el-table-column>
-            <el-table-column prop="date" label="报修日期" sortable width="180">
-            </el-table-column>
-            <el-table-column
-              prop="tag"
-              label="状态"
-              width="100"
-              :filters="[
-                { text: '已维修', value: '已维修' },
-                { text: '未维修', value: '未维修' },
-              ]"
-              :filter-method="filterTag"
-              filter-placement="bottom-end"
+          <i class="el-icon-user-solid"></i>
+          <span style="font-size: 32px; font-weight: bold">{{
+            UsersData
+          }}</span>
+          <span>系统用户数</span>
+        </div>
+      </el-col>
+      <el-col :span="6">
+        <div
+          class="grid-content bg-purple"
+          style="
+            height: 100px;
+            border-radius: 8px;
+            margin: 5px;
+            background-color: #fff;
+          "
+        >
+          <i class="el-icon-user-solid"></i>
+          <span style="font-size: 32px; font-weight: bold">{{
+            payMessage
+          }}</span>
+          <span>计费订单数量</span>
+        </div>
+      </el-col>
+      <el-col :span="6">
+        <div
+          class="grid-content bg-purple"
+          style="
+            height: 100px;
+            border-radius: 8px;
+            margin: 5px;
+            background-color: #fff;
+          "
+        >
+          <i class="el-icon-user-solid"></i>
+          <span style="font-size: 32px; font-weight: bold">{{
+            ParkOrder
+          }}</span>
+          <span>车位数量</span>
+        </div>
+      </el-col>
+      <el-col :span="6">
+        <div
+          class="grid-content bg-purple"
+          style="
+            height: 100px;
+            border-radius: 8px;
+            margin: 5px;
+            background-color: #fff;
+          "
+        >
+          <i class="el-icon-user-solid"></i>
+          <span style="font-size: 32px; font-weight: bold">{{ FeedBack }}</span>
+          <span>用户反馈数量</span>
+        </div>
+      </el-col>
+      <!-- 小区分布统计 -->
+      <el-col :span="8">
+        <div
+          class="grid-content bg-purple"
+          style="
+            height: 300px;
+            border-radius: 8px;
+            margin: 5px;
+            background-color: #fff;
+          "
+          id="distribution"
+        ></div>
+      </el-col>
+      <!-- 车位数、已分配、已缴费 -->
+      <el-col :span="8">
+        <div
+          class="grid-content bg-purple"
+          style="
+            height: 300px;
+            border-radius: 8px;
+            margin: 5px;
+            background-color: #fff;
+          "
+          id="Community"
+        ></div>
+      </el-col>
+      <!-- 缴费项目订单 -->
+      <el-col :span="8">
+        <div
+          class="grid-content bg-purple"
+          style="
+            height: 300px;
+            border-radius: 8px;
+            margin: 5px;
+            background-color: #fff;
+          "
+          id="Project"
+        ></div>
+      </el-col>
+      <el-col :span="17">
+        <div
+          class="grid-content bg-purple"
+          style="
+            height: 300px;
+            border-radius: 8px;
+            margin: 5px;
+            background-color: #fff;
+          "
+          id="access"
+        ></div>
+      </el-col>
+      <!-- 维修订单 -->
+      <el-col :span="7">
+        <div
+          class="grid-content bg-purple"
+          style="
+            height: 300px;
+            border-radius: 8px;
+            margin: 5px;
+            background-color: #fff;
+          "
+          id="Project"
+        >
+          <template>
+            <el-table
+              ref="filterTable"
+              :data="tableData"
+              style="width: 100%; font-size: 12px"
             >
-              <template slot-scope="scope">
-                <el-tag
-                  :type="scope.row.tag === '已维修' ? 'success' : 'danger'"
-                  disable-transitions
-                  >{{ scope.row.tag }}</el-tag
-                >
-              </template>
-            </el-table-column>
-          </el-table>
-        </template>
-      </div>
-    </el-col>
-  </el-row>
+              <el-table-column prop="name" label="维修内容" width="180">
+              </el-table-column>
+              <el-table-column
+                prop="date"
+                label="报修日期"
+                sortable
+                width="180"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="tag"
+                label="状态"
+                width="100"
+                :filters="[
+                  { text: '已维修', value: '已维修' },
+                  { text: '未维修', value: '未维修' },
+                ]"
+                :filter-method="filterTag"
+                filter-placement="bottom-end"
+              >
+                <template slot-scope="scope">
+                  <el-tag
+                    :type="scope.row.tag === '已维修' ? 'success' : 'danger'"
+                    disable-transitions
+                    >{{ scope.row.tag }}</el-tag
+                  >
+                </template>
+              </el-table-column>
+            </el-table>
+          </template>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
@@ -203,10 +261,6 @@ export default {
     };
   },
   mounted() {
-    this.initEchartsone();
-    this.initEchartstwo();
-    this.initEchartsthree();
-    this.initEchartsfour();
     this.getUsersData();
     this.getpayMessage();
     this.getpayParkOrder();
@@ -233,10 +287,13 @@ export default {
     this.getEchartsDatathree4();
     this.getEchartsDatathree5();
     this.getEchartsDatathree6();
-
     this.getEchartsDatafour();
     this.getorderData();
     this.getList();
+    this.initEchartsone();
+    this.initEchartstwo();
+    this.initEchartsthree();
+    this.initEchartsfour();
     // 初始化 ECharts
     //调用a1的数据
   },
@@ -1022,12 +1079,7 @@ export default {
   height: 300px; /* 确保有高度 */
   width: 100%; /* 确保有宽度 */
 }
-.content {
-  overflow: hidden;
-}
-
 .poster {
-  position: absolute;
   left: 0;
   width: 100%;
   background-color: #ffffff;
@@ -1058,42 +1110,6 @@ export default {
       }
     }
   }
-}
-
-.top {
-  display: flex;
-  padding: 20px;
-  margin-top: 60px;
-  justify-content: space-between;
-
-  .top-box {
-    width: 24%;
-    height: 110px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 6px;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-
-    .top-box-flex {
-      width: 72%;
-      display: flex;
-      height: 100%;
-      margin: auto;
-      align-items: center;
-      justify-content: space-between;
-    }
-  }
-}
-
-.number {
-  font-size: 32px;
-  font-weight: 700;
-}
-
-.desc {
-  font-size: 14px;
-  margin-top: 8px;
 }
 
 // 往上划走的轮播公告过渡动画
