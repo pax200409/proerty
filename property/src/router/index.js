@@ -151,6 +151,11 @@ const routes = [
         path: 'service/houseRepair',
         name: 'HouseRepair',
         component: () => import('../components/HouseRepair.vue')
+      },
+      {
+        path: 'user/Message',
+        name: 'Message',
+        component: () => import('../components/Message.vue')
       }
     ]
   }
